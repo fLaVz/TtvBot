@@ -91,17 +91,36 @@ class IrcClient {
 
 			if(message[1].Contains("@")) {
 				viewerName = message[1].Split('!', '@')[1];
+				
 			}
 
-			switch(message[2]) {
 
-				case "!hello":
-				sendChatMessage("Salut ! et bienvenue sur le live " + viewerName + " :)");
-				break;
+			if(isABannedWord(message[2], viewerName) == true) {
 
-				case "!useroptions":
-				sendChatMessage(viewerName + " : Voici mon useroptions ! -> http://pastebin.com/eEuegC3D");
-				break;
+				switch(message[2]) {
+
+					case "!hello":
+					sendChatMessage("Salut ! et bienvenue sur le live " + viewerName + " :)");
+					break;
+
+					case "!useroptions":
+					sendChatMessage(viewerName + " : Voici mon useroptions ! -> http://pastebin.com/eEuegC3D");
+					break;
+				}
+			}
+		}
+
+		public bool isABannedWord(string message, string viewerName) {
+
+			if(message.Contains("pute") || 
+				message.Contains("salope")) {
+
+				sendChatMessage(viewerName + " : Don't be so rude");
+				sendChatMessage("/Timeout " + viewerName + " 3");
+
+				return false;
+			}else {
+				return true;
 			}
 		}
 }
