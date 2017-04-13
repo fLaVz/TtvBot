@@ -72,8 +72,7 @@ class IrcClient {
 
 			if(parsed.Length == 3) {
 
-				process(parsed[2]);
-
+				process(parsed);
 			}else {
 
 				if(message.Contains("PING")) {
@@ -86,14 +85,23 @@ class IrcClient {
 		}
 
 
-		public void process(string message) {
+		public void process(string[] message) {
 
-			switch(message) {
+			string viewerName = "";
+
+			if(message[1].Contains("@")) {
+				viewerName = message[1].Split('!', '@')[1];
+			}
+
+			switch(message[2]) {
 
 				case "!hello":
-				sendChatMessage("Salut ! et bienvenue sur le live :)");
+				sendChatMessage("Salut ! et bienvenue sur le live " + viewerName + " :)");
+				break;
+
+				case "!useroptions":
+				sendChatMessage(viewerName + " : Voici mon useroptions ! -> http://pastebin.com/eEuegC3D");
 				break;
 			}
 		}
-
 }
