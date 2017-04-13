@@ -3,9 +3,10 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
+using System;
 
 
-	class IrcClient {
+class IrcClient {
 
 		private string userName;
 		private string channel;
@@ -49,6 +50,7 @@ using System.IO;
 		public void sendIrcMessage(string message) {
 
 			outputStream.WriteLine(message);
+			Console.WriteLine("$< :" + message);
 			outputStream.Flush();
 		}
 
@@ -66,8 +68,32 @@ using System.IO;
 
 		public void parse(string message) {
 
-			//message.Split(":");
+			string[] parsed = message.Split(':');
+
+			if(parsed.Length == 3) {
+
+				process(parsed[2]);
+
+			}else {
+
+				if(message.Contains("PING")) {
+
+				Console.WriteLine("PONG :tmi.twitch.tv");
+				sendIrcMessage("PONG :tmi.twitch.tv");
+				}
+
+			}
 		}
 
 
-	}
+		public void process(string message) {
+
+			switch(message) {
+
+				case "!hello":
+				sendChatMessage("Salut ! et bienvenue sur le live :)");
+				break;
+			}
+		}
+
+}

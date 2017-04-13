@@ -16,7 +16,6 @@ class main {
 			"flav__bot", 
 			"oauth:yx9llpk5k7fjq64895vqifadgy0fke");
 
-		string outputMessage;
 		string inputMessage;
 		int loop = 1;
 
@@ -29,30 +28,6 @@ class main {
 			Console.WriteLine("$> " + inputMessage);
 
 			irc.parse(inputMessage);
-
-			if(inputMessage.Contains("!hello")) {
-
-				outputMessage = "yoooooooooo";
-				Console.WriteLine("$< " + outputMessage);
-				irc.sendChatMessage(outputMessage);
-
-			}
-
-			if(inputMessage.Contains("PING")) {
-				Console.WriteLine("PONG :tmi.twitch.tv");
-				irc.sendIrcMessage("PONG :tmi.twitch.tv");
-			}
-
-			if(inputMessage.Contains("!bye")) {
-				irc.sendChatMessage("Je m'en vais :)");
-				loop = 0;
-			}
-
-			if(inputMessage.Contains("!cap")) {
-				irc.sendIrcMessage("CAP REQ :twitch.tv/commands");
-				irc.sendIrcMessage("USERSTATE flav__");
-				
-			}
 		}
 	}
 
