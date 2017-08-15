@@ -1,6 +1,5 @@
 using System;
 using System.Text;
-using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
@@ -16,19 +15,24 @@ class main {
 			"flav__bot", 
 			"oauth:yx9llpk5k7fjq64895vqifadgy0fke");
 
-		string inputMessage;
-		int loop = 1;
+		graphics box = new graphics();
+		box.configure();
+		/*
 
+		string inputMessage;
 		irc.joinRoom("flav__");
 		
 
-		while(loop == 1) {
+		while(true) {
 
 			inputMessage = irc.readMessage();
+        	Console.ForegroundColor = ConsoleColor.DarkGreen;
+
 			Console.WriteLine("$> " + inputMessage);
 
+			Console.ResetColor();
 			irc.parse(inputMessage);
-		}
+		}*/
 	}
 
 }

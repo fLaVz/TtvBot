@@ -1,5 +1,4 @@
 using System.Text;
-using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
@@ -44,14 +43,19 @@ class IrcClient {
 
 			this.channel = channel;
 			outputStream.WriteLine("JOIN #" + channel);
+			sendChatMessage("/me has join the channel");
 			outputStream.Flush();
 		}
 
 		public void sendIrcMessage(string message) {
 
 			outputStream.WriteLine(message);
+
+        	Console.ForegroundColor = ConsoleColor.DarkRed;
 			Console.WriteLine("$< :" + message);
+			
 			outputStream.Flush();
+			Console.ResetColor();
 		}
 
 		public void sendChatMessage(string message) {
@@ -106,6 +110,7 @@ class IrcClient {
 					case "!useroptions":
 					sendChatMessage(viewerName + " : Voici mon useroptions ! -> http://pastebin.com/eEuegC3D");
 					break;
+
 				}
 			}
 		}
@@ -116,7 +121,7 @@ class IrcClient {
 				message.Contains("salope")) {
 
 				sendChatMessage(viewerName + " : Don't be so rude");
-				sendChatMessage("/Timeout " + viewerName + " 3");
+				sendChatMessage("/timeout " + viewerName + " 3");
 
 				return false;
 			}else {

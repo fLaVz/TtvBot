@@ -1,2 +1,2 @@
 all:
-	csc -out:app.exe main.cs ircClient.cs
+	csc -out:app.exe main.cs ircClient.cs graphics.cs
